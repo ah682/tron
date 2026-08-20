@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "mode": "static-shareholder-preview",
+    "asOf": "2026-08-19T08:00:00Z",
+    "source": "Approved public-facing TRON homepage snapshot",
+    "notice": "Demonstration data only. No private services, credentials, internal hostnames, or backend implementation details are included."
+  },
+  "network": {
+    "totalTransactions": 8603944561,
+    "totalAccounts": 226325000,
+    "totalValueLockedUsd": 15358000000,
+    "transferVolume24hUsd": 15384000000,
+    "blockTimeSeconds": 3
+  },
+  "market": {
+    "symbol": "TRX",
+    "currency": "USD",
+    "currentPrice": 0.3329,
+    "marketCap": 31600000000,
+    "globalRank": 8,
+    "transactionVolume24h": 434000000,
+    "transactions24h": 11700000,
+    "accountsHoldingTrx": 240000000,
+    "chart": [
+      { "date": "2026-07-19", "price": 0.327 },
+      { "date": "2026-07-21", "price": 0.329 },
+      { "date": "2026-07-24", "price": 0.332 },
+      { "date": "2026-07-27", "price": 0.323 },
+      { "date": "2026-07-31", "price": 0.327 },
+      { "date": "2026-08-04", "price": 0.326 },
+      { "date": "2026-08-07", "price": 0.330 },
+      { "date": "2026-08-10", "price": 0.337 },
+      { "date": "2026-08-13", "price": 0.331 }
+    ]
+  },
+  "latestBlock": {
+    "number": 85485374,
+    "producer": "CryptoChain",
+    "transactions": 547,
+    "ageSeconds": 13
+  },
+  "insights": [
+    {
+      "id": "financial-freedom-revolution",
+      "title": "Justin Sun: The Road to Financial Freedom Revolution",
+      "publishedAt": "2026-01-21",
+      "url": "https://www.hejustinsun.com/in-the-media---articles/justin-sun-the-road-to-financial-freedom-revolution",
+      "featured": true
+    },
+    {
+      "id": "blue-origin-launch",
+      "title": "Blue Origin's Latest Launch Sends Crypto Billionaire Justin Sun to Space After He Bid $28M for Seat on 10-Minute Flight",
+      "publishedAt": "2025-08-03",
+      "url": "https://people.com/blue-origin-launch-sends-crypto-billionaire-justin-sun-to-space-10-minute-flight-11783901",
+      "featured": false
+    },
+    {
+      "id": "forbes-crypto-billionaire",
+      "title": "Forbes | Meet The Crypto Billionaire Who Helped The Trumps Make $400 Million",
+      "publishedAt": "2025-03-07",
+      "url": "https://www.forbes.com/sites/ninabambysheva/2025/03/27/meet-the-crypto-billionaire-who-just-helped-the-trumps-net-400-milllion/",
+      "featured": false
+    }
+  ]
+}

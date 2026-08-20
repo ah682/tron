@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tron.network/schemas/site-content.schema.json",
+  "title": "TRON public website content snapshot",
+  "description": "Validation contract for public, presentation-safe data consumed by the static shareholder website.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "network", "market", "latestBlock", "insights"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "mode", "asOf", "source", "notice"],
+      "properties": {
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "mode": { "const": "static-shareholder-preview" },
+        "asOf": { "type": "string", "format": "date-time" },
+        "source": { "type": "string", "minLength": 1 },
+        "notice": { "type": "string", "minLength": 1 }
+      }
+    },
+    "network": { "$ref": "#/$defs/networkSnapshot" },
+    "market": { "$ref": "#/$defs/marketSnapshot" },
+    "latestBlock": { "$ref": "#/$defs/latestBlock" },
+    "insights": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/insight" }
+    }
+  },
+  "$defs": {
+    "nonNegativeInteger": { "type": "integer", "minimum": 0 },
+    "nonNegativeNumber": { "type": "number", "minimum": 0 },
+    "networkSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["totalTransactions", "totalAccounts", "totalValueLockedUsd", "transferVolume24hUsd", "blockTimeSeconds"],
+      "properties": {
+        "totalTransactions": { "$ref": "#/$defs/nonNegativeInteger" },
+        "totalAccounts": { "$ref": "#/$defs/nonNegativeInteger" },
+        "totalValueLockedUsd": { "$ref": "#/$defs/nonNegativeNumber" },
+        "transferVolume24hUsd": { "$ref": "#/$defs/nonNegativeNumber" },
+        "blockTimeSeconds": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "marketPoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "price"],
+      "properties": {
+        "date": { "type": "string", "format": "date" },
+        "price": { "$ref": "#/$defs/nonNegativeNumber" }
+      }
+    },
+    "marketSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["symbol", "currency", "currentPrice", "marketCap", "globalRank", "transactionVolume24h", "transactions24h", "accountsHoldingTrx", "chart"],
+      "properties": {
+        "symbol": { "const": "TRX" },
+        "currency": { "const": "USD" },
+        "currentPrice": { "$ref": "#/$defs/nonNegativeNumber" },
+        "marketCap": { "$ref": "#/$defs/nonNegativeNumber" },
+        "globalRank": { "type": "integer", "minimum": 1 },
+        "transactionVolume24h": { "$ref": "#/$defs/nonNegativeNumber" },
+        "transactions24h": { "$ref": "#/$defs/nonNegativeInteger" },
+        "accountsHoldingTrx": { "$ref": "#/$defs/nonNegativeInteger" },
+        "chart": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/marketPoint" } }
+      }
+    },
+    "latestBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["number", "producer", "transactions", "ageSeconds"],
+      "properties": {
+        "number": { "$ref": "#/$defs/nonNegativeInteger" },
+        "producer": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "transactions": { "$ref": "#/$defs/nonNegativeInteger" },
+        "ageSeconds": { "$ref": "#/$defs/nonNegativeInteger" }
+      }
+    },
+    "insight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "publishedAt", "url", "featured"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "publishedAt": { "type": "string", "format": "date" },
+        "url": { "type": "string", "format": "uri" },
+        "featured": { "type": "boolean" }
+      }
+    }
+  }
+}
