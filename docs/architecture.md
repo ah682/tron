@@ -1,40 +1,41 @@
-# Static shareholder website architecture
+# Site structure
 
-## Delivery model
+## Static files
 
-The production artifact is a dependency-free static website: HTML, CSS, JavaScript, fonts, images, and SVGs. It can be served directly by GitHub Pages, a CDN, or any static web server. The current build performs no runtime request to a TRON backend and embeds no credentials, environment variables, private routes, internal hostnames, or source maps.
+The site consists of HTML, CSS, JavaScript, fonts and images. It can be served by
+GitHub Pages, a CDN or any static web server without a build step.
 
-`data/site-data.json` is the approved public snapshot used to review data shape and values. The visible homepage has equivalent defaults embedded in its HTML and JavaScript, so it continues to work when opened locally and when JSON fetching is unavailable.
+`index.html` contains the homepage sections and network figures. `app.js` adds
+navigation, search, carousels and selectors. Images and fonts are in `assets/`.
 
-## Public data boundary
+[data/site-data.json](../data/site-data.json) records a content snapshot for the
+[JSON Schema](../schema/site-content.schema.json). The visible page uses values
+embedded in HTML and JavaScript rather than fetching that file.
 
-The optional future integration boundary is documented in `schema/public-api.openapi.yaml`. It describes only the minimum public response fields needed for:
+## Browser behaviour
 
-- network totals;
-- TRX market presentation;
-- the latest block strip;
-- published insight cards; and
-- public site search.
+- Desktop navigation uses mega-menus; mobile navigation uses collapsible groups.
+- Search runs against an embedded index.
+- Language selection saves the chosen locale in `localStorage`.
+- The animated block strip illustrates the snapshot data.
+- External links opened in a new tab use `noopener noreferrer`.
 
-The contract deliberately omits storage layout, provider topology, signing, administration, access-control implementation, service-to-service communication, logging internals, and deployment configuration. The placeholder server uses the reserved `.invalid` domain and cannot accidentally target infrastructure.
+The page has no API calls, form submissions, authentication, analytics or
+third-party JavaScript.
 
-## Browser behavior
+## Example API
 
-- Desktop navigation uses accessible mega-menus.
-- Mobile navigation uses collapsible groups and traps page scrolling while open.
-- Search runs entirely in the browser against a small approved index.
-- Language selection stores only the selected locale in `localStorage`; no personal or analytics data is collected.
-- The block strip animation is illustrative and does not claim to be a live feed.
-- All external links use `noopener noreferrer` when opened in a new tab.
+[schema/public-api.openapi.yaml](../schema/public-api.openapi.yaml) describes
+possible responses for network totals, market figures, latest blocks, insight
+cards and search. It uses a placeholder `.invalid` server address.
 
-## Security and privacy
+A future integration would need a real data source, response validation, rate
+limits and error handling. A Content Security Policy at the host can restrict
+which services the page may contact.
 
-The static build has no forms that transmit data, no authentication, no cookies, no analytics, and no third-party JavaScript. Vendored assets remove runtime dependency on the live TRON asset host. If a backend is integrated later, use a restrictive Content Security Policy at the hosting layer, validate responses against the supplied schema, apply public rate limits, return generic errors, and retain the strict response allowlist in the OpenAPI contract.
+## Update the content
 
-## Updating the shareholder snapshot
-
-1. Obtain an approved public-data export.
-2. Update `data/site-data.json` and the equivalent visible defaults in `index.html`.
-3. Validate the JSON against `schema/site-content.schema.json`.
-4. Review every link and media asset for publication approval.
-5. Run responsive and keyboard QA before deployment.
+1. Update the snapshot in `data/site-data.json` and the matching values in
+   `index.html` or `app.js`.
+2. Check the snapshot against `schema/site-content.schema.json`.
+3. Check links, images, keyboard navigation and the mobile layout before publishing.

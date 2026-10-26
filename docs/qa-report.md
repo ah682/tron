@@ -1,10 +1,10 @@
-# Release QA report
+# Browser check notes
 
-Verified on 2026-08-19 against the public TRON Network homepage reference.
+Checks recorded on 2026-08-19, using the public TRON Network homepage as the reference.
 
-## Automated browser coverage
+## Browser checks
 
-The final static build was exercised at 1440×900, 1024×800, 768×900, and 390×844 CSS pixels. The checks confirmed:
+The site was checked at 1440×900, 1024×800, 768×900, and 390×844 CSS pixels. The checks confirmed:
 
 - no horizontal document overflow;
 - all principal homepage sections are present;
@@ -14,9 +14,9 @@ The final static build was exercised at 1440×900, 1024×800, 768×900, and 390�
 - working desktop mega-menus, local search, protocol carousel controls, ecosystem selector, and partner tabs; and
 - working mobile navigation open, accordion, close, and scroll-lock behavior.
 
-## Lighthouse lab result
+## Lighthouse
 
-Local mobile-mode audit:
+Local mobile-mode results:
 
 | Category | Score |
 | --- | ---: |
@@ -25,9 +25,9 @@ Local mobile-mode audit:
 | Best Practices | 100 |
 | SEO | 100 |
 
-Key measurements were 1.4 s First Contentful Paint, 2.1 s Largest Contentful Paint, 0 ms Total Blocking Time, and 0 Cumulative Layout Shift. Lab timings can vary by machine; the category results reflect the final checked artifact.
+Key measurements were 1.4 s First Contentful Paint, 2.1 s Largest Contentful Paint, 0 ms Total Blocking Time, and 0 Cumulative Layout Shift. Timings can vary by machine. These results describe the build checked on that date.
 
-## Data-contract and safety checks
+## Data and network checks
 
 - `data/site-data.json` conforms to `schema/site-content.schema.json`.
 - Every local JSON Schema and OpenAPI reference resolves.
